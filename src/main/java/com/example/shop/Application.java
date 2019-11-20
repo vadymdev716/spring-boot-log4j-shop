@@ -1,14 +1,14 @@
 package com.example.shop;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.log4j.Log4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableAsync;
 
+@Log4j
+@EnableAsync
 @SpringBootApplication
 public class Application {
-
-    private static Logger log = LoggerFactory.getLogger(com.example.shop.Application.class);
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
