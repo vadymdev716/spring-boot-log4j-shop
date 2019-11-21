@@ -13,7 +13,7 @@ public class ProductFilterImpl implements ProductFilter{
     public List<Product> nameRegularExpressionFilter(List<Product> products, String regularExpression) {
         List<Product> filteredProducts = new ArrayList<>();
         for(Product product : products){
-            if (product.getDescription().matches(regularExpression)){
+            if (!product.getName().matches(regularExpression)){
                 filteredProducts.add(product);
             }
         }
