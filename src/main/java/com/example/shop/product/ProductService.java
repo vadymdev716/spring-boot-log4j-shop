@@ -8,5 +8,5 @@ import java.util.concurrent.CompletableFuture;
 @Service
 public interface ProductService {
 
-   CompletableFuture<List<Product>> getProductList(String condition);
+   CompletableFuture<List<Product>> getProductList(String filterCondition);
 }
