@@ -9,7 +9,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertEquals;
 
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
 public class RegExpressionDecodingImplTest {
