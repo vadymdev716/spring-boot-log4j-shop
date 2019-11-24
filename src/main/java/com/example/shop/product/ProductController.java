@@ -19,7 +19,8 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<Product> getProductList(@RequestParam String nameFilter) throws InterruptedException, ExecutionException, TimeoutException {
+    public List<Product> getProductList(@RequestParam String nameFilter) throws InterruptedException,
+            ExecutionException, TimeoutException {
         return productService.getProductList(nameFilter).get(5, TimeUnit.SECONDS);
     }
 }
