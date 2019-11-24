@@ -24,7 +24,7 @@ public class ProductControllerTest {
     MockMvc mockMvc;
 
     @Test
-    public void getProductList() throws Exception {
+    public void get_product_list_valid_test() throws Exception {
         MvcResult mvcResult = mockMvc.perform(get("/shop/product")
                 .param("nameFilter", "Xi4qW2V2YV0uKiQ=")
                 .accept(MediaType.APPLICATION_JSON))
@@ -34,6 +34,17 @@ public class ProductControllerTest {
                 .andReturn();
 
         assertEquals(getTestStr(), mvcResult.getResponse().getContentAsString());
+    }
+
+    @Test
+    public void get_product_list_not_valid_data_test() throws Exception {
+        MvcResult mvcResult = mockMvc.perform(get("/shop/product")
+                .param("nameFilter", "")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        assertEquals("Incorrect entered parameter length!", mvcResult.getResponse().getErrorMessage());
     }
 
     private String getTestStr(){
