@@ -47,6 +47,18 @@ public class ProductControllerTest {
         assertEquals("Incorrect entered parameter length!", mvcResult.getResponse().getErrorMessage());
     }
 
+    //^.*[abcdefghijklmnopqrstuvwxyz].*$
+    @Test
+    public void get_product_list_not_valid_data_full_alphabet_test() throws Exception {
+        MvcResult mvcResult = mockMvc.perform(get("/shop/product")
+                .param("nameFilter", "Xi4qW2FiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6XS4qJA==")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andReturn();
+
+        assertEquals("Products with your filter not found!", mvcResult.getResponse().getErrorMessage());
+    }
+
     private String getTestStr(){
         String expected = "[{\"id\":5,\"name\":\"Tom 5\",\"description\":\"description 5\"},{\"id\":6,\"name\":\"Tom 6\"," +
                 "\"description\":\"description 6\"},{\"id\":7,\"name\":\"nic 7\",\"description\":\"description 7\"}," +
