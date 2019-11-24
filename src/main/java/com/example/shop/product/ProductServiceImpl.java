@@ -33,6 +33,8 @@ public class ProductServiceImpl implements ProductService {
         String filter = regExpressionDecoding.decode(filterCondition);
         List<Product> products = productRepo.getProducts();
         List<Product> filteredProducts = productFilter.nameRegularExpressionFilter(products, filter);
+
+        productValidation.listNotEmpty(filteredProducts, filterCondition);
         return CompletableFuture.completedFuture(filteredProducts);
     }
 }
