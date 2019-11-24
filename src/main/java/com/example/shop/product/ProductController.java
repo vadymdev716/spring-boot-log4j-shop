@@ -1,15 +1,15 @@
 package com.example.shop.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 @RestController
-@RequestMapping("/shop")
+@RequestMapping("/shop/product")
 public class ProductController {
     private ProductService productService;
 
@@ -18,11 +18,8 @@ public class ProductController {
         this.productService = productService;
     }
 
-    //http://localhost:8080/shop/product?nameFilter=1;
-    @GetMapping("/product")
-    public List<Product> getProductList(@RequestParam String nameFilter) {
-        //return "Hi product";
-        //return new ArrayList<Product>();
-        return productService.getProductList(nameFilter);
+    @GetMapping
+    public List<Product> getProductList(@RequestParam String nameFilter) throws InterruptedException, ExecutionException, TimeoutException {
+        return productService.getProductList(nameFilter).get(5, TimeUnit.SECONDS);
     }
 }
