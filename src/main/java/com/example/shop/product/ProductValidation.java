@@ -10,7 +10,7 @@ public class ProductValidation {
 
     public void checkLength(String filterCondition) {
         if (filterCondition.length() == 0) {
-            log.info(String.format("Incorrect entered parameter length (filterCondition='%s')!", filterCondition));
+            log.error(String.format("Incorrect entered parameter length (filterCondition='%s')!", filterCondition));
             throw new IncorrectLength("Incorrect entered parameter length!");
         }
     }
