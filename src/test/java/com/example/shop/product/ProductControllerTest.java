@@ -44,7 +44,26 @@ public class ProductControllerTest {
                 .andExpect(status().isBadRequest())
                 .andReturn();
 
-        assertEquals("Incorrect entered parameter length!", mvcResult.getResponse().getErrorMessage());
+        assertEquals("Incorrect entered parameter length! You not entered any characters or only spaces!",
+                mvcResult.getResponse().getErrorMessage());
+    }
+
+    @Test
+    public void get_product_list_not_valid_data_spaces_test() throws Exception {
+        mockMvc.perform(get("/shop/product")
+                .param("nameFilter", "  ")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Incorrect entered parameter!"));
+    }
+
+    @Test
+    public void get_product_list_not_valid_filter_test() throws Exception {
+        mockMvc.perform(get("/shop/product")
+                .param("nameFilter", "abcdefghijklmnopqrstuvwxyz")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Incorrect entered parameter!"));
     }
 
     //^.*[abcdefghijklmnopqrstuvwxyz].*$
