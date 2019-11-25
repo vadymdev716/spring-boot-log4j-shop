@@ -1,7 +1,6 @@
 package com.example.shop.encoding.decoding;
 
 import com.example.shop.Application;
-import com.example.shop.exception.IncorrectFilterParam;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +20,7 @@ public class RegExpressionDecodingImplTest {
         assertEquals("^E.*$", regExpressionDecoding.decode("XkUuKiQ="));
     }
 
-    @Test(expected = IncorrectFilterParam.class)
-    public void decode_not_valid_filter_param_space_test() {
-        regExpressionDecoding.decode(" ");
-    }
-
-    @Test(expected = IncorrectFilterParam.class)
+    @Test(expected = IllegalArgumentException.class)
     public void decode_not_valid_filter_param_numeral_test() {
         regExpressionDecoding.decode("1");
     }
